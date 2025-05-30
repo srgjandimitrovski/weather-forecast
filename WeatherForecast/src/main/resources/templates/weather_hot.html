@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="./static/styles.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Hot Days (over 25°C)</h1>
+
+    <table style="border: 1px solid black">
+        <thead style="border: 1px solid black">
+        <tr>
+            <th>City</th>
+            <th>Date</th>
+            <th>Max Temp (°C)</th>
+        </tr>
+        </thead>
+        <tbody style="border: 1px solid black">
+        <tr th:each="forecast : ${forecasts}">
+            <td th:text="${forecast.city}"></td>
+            <td th:text="${forecast.date}"></td>
+            <td th:text="${forecast.maxTemp}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>

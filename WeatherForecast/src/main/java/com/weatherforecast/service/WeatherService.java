@@ -48,11 +48,19 @@ public class WeatherService {
     public List<Forecast> getForecasts(String city) {
         return forecastRepository.findByCity(city.toUpperCase());
     }
+
     public List<Forecast> getHotForecasts() {
-        return forecastRepository.findByMaxTempGreaterThan(25.00);
-    }
+        List<Forecast> hotForecasts = forecastRepository.findByMaxTempGreaterThan(25.00);
+        if (hotForecasts == null || hotForecasts.isEmpty()) {
+            throw new ForecastNotFoundException("No hot forecasts found (maxTemp > 25°C).");
+        }
+        return hotForecasts;    }
 
     public List<Forecast> getRainyForecasts() {
-        return forecastRepository.findByMain("Rain");
+        List<Forecast> rainyForecasts = forecastRepository.findByMain("Rain");
+        if (rainyForecasts == null || rainyForecasts.isEmpty()) {
+            throw new ForecastNotFoundException("No rainy forecasts found.");
+        }
+        return rainyForecasts;    
     }
 }
